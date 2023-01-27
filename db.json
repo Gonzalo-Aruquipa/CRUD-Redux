@@ -24,6 +24,41 @@
       "nombre": "Jugo de Fresa",
       "precio": "200",
       "id": 5
+    },
+    {
+      "nombre": "platano",
+      "precio": 456,
+      "id": 6
+    },
+    {
+      "nombre": "sandia",
+      "precio": 111,
+      "id": 7
+    },
+    {
+      "nombre": "sandia",
+      "precio": 111,
+      "id": 8
+    },
+    {
+      "nombre": "frutilla",
+      "precio": 222,
+      "id": 9
+    },
+    {
+      "nombre": "frutillass",
+      "precio": 2222,
+      "id": 10
+    },
+    {
+      "nombre": "palta",
+      "precio": 89,
+      "id": 11
+    },
+    {
+      "nombre": "jugos",
+      "precio": 222,
+      "id": 12
     }
   ]
 }
