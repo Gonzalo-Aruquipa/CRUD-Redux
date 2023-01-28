@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { crearNuevoProductoAction } from "../actions/productoActions";
+import { crearNuevoProductoAction} from "../actions/productoActions";
 
 export const NuevoProducto = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cargando = useSelector(state => state.productos.loading);
   const errores = useSelector(state => state.productos.error);
+  
 
 
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState(0);
+
+  
 
   const handleSubmitProducto = (e) => {
     e.preventDefault();
