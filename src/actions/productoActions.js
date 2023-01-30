@@ -7,6 +7,9 @@ import {
   COMENZAR_DESCARGA_PRODUCTOS,
   DESCARGA_PRODUCTOS_EXITO,
   DESCARGA_PRODUCTOS_ERROR,
+  OBTENER_PRODUCTO_ELIMINAR,
+  PRODUCTO_ELIMINADO_EXITO,
+  PRODUCTO_ELIMINADO_ERROR,
 } from "../types";
 
 export const crearNuevoProductoAction = (producto) => {
@@ -53,6 +56,31 @@ export const obtenerProductosAction = () => {
         payload: true,
       });
     }
+  };
+};
 
+export const eliminarProducto = (id) => {
+  return async (dispatch) => {
+    dispatch({
+      type: OBTENER_PRODUCTO_ELIMINAR,
+      payload: id,
+    });
+    try {
+      await axios.delete(`http://localhost:4000/productos/${id}`);
+      dispatch({
+        type: PRODUCTO_ELIMINADO_EXITO,
+      });
+      Swal.fire(
+        'Eliminado!',
+        'El producto ha sido eliminado',
+        'success'
+      )
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: PRODUCTO_ELIMINADO_ERROR,
+        payload: true,
+      });
+    }
   };
 };
