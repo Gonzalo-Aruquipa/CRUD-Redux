@@ -2,13 +2,13 @@
   "productos": [
     {
       "id": 1,
-      "nombre": "Jugo de Zanahoria",
-      "precio": "31111"
+      "nombre": "Jugo de Zanahorias",
+      "precio": "3121"
     },
     {
       "id": 2,
       "nombre": "Jugo de Naranja",
-      "precio": "1"
+      "precio": "10"
     },
     {
       "nombre": "Jugo de Naranja",
@@ -24,6 +24,11 @@
       "nombre": "Jugo de Fresa",
       "precio": "200",
       "id": 5
+    },
+    {
+      "nombre": "maracuyá",
+      "precio": 777,
+      "id": 6
     }
   ]
 }

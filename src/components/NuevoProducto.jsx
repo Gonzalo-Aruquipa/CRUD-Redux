@@ -1,31 +1,39 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { crearNuevoProductoAction} from "../actions/productoActions";
+import { mostrarAlerta, ocultarAlerta } from "../actions/alertaActions";
+import { crearNuevoProductoAction } from "../actions/productoActions";
 
 export const NuevoProducto = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const cargando = useSelector(state => state.productos.loading);
-  const errores = useSelector(state => state.productos.error);
-  
-
+  const cargando = useSelector((state) => state.productos.loading);
+  const errores = useSelector((state) => state.productos.error);
+  const alerta = useSelector(state => state.alerta.alerta);
 
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState(0);
 
-  
-
   const handleSubmitProducto = (e) => {
     e.preventDefault();
-    if(nombre.trim() === "" || precio <= 0){
-return;
+    if (nombre.trim() === "" || precio <= 0) {
+      const alerta = {
+        msg: "Ambos campos son obligatorios",
+        classes: "alert alert-danger text-center text-uppercase p3"
+      }
+      dispatch(mostrarAlerta(alerta));
+
+      return;
     }
-    dispatch(crearNuevoProductoAction({
-      nombre, precio
-    }));
-    navigate("/")
-  }
+    dispatch(ocultarAlerta());
+    dispatch(
+      crearNuevoProductoAction({
+        nombre,
+        precio,
+      })
+    );
+    navigate("/");
+  };
 
   return (
     <div className="row justify-content-center">
@@ -35,6 +43,7 @@ return;
             <h2 className="text-center mb-4 font-weight-bold">
               Agregar Nuevo producto
             </h2>
+            {alerta? <p className={alerta.classes}>{alerta.msg}</p>: null}
             <form onSubmit={handleSubmitProducto}>
               <div className="form-group">
                 <label>Nombre Producto</label>
@@ -44,7 +53,7 @@ return;
                   placeholder="Nombre Producto"
                   name="nombre"
                   value={nombre}
-                  onChange={e => setNombre(e.target.value)}
+                  onChange={(e) => setNombre(e.target.value)}
                 />
               </div>
 
@@ -56,7 +65,7 @@ return;
                   placeholder="Precio Producto"
                   name="precio"
                   value={precio}
-                  onChange={e => setPrecio(Number(e.target.value))}
+                  onChange={(e) => setPrecio(Number(e.target.value))}
                 />
               </div>
 
@@ -67,8 +76,12 @@ return;
                 Agregar
               </button>
             </form>
-            {cargando? <p>Cargando...</p>:null}
-            {errores? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p>:null}
+            {cargando ? <p>Cargando...</p> : null}
+            {errores ? (
+              <p className="alert alert-danger p2 mt-4 text-center">
+                Hubo un error
+              </p>
+            ) : null}
           </div>
         </div>
       </div>

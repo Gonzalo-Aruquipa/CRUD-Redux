@@ -10,6 +10,10 @@ import {
   OBTENER_PRODUCTO_ELIMINAR,
   PRODUCTO_ELIMINADO_EXITO,
   PRODUCTO_ELIMINADO_ERROR,
+  OBTENER_PRODUCTO_EDITAR,
+  COMENZAR_EDICION_PRODUCTO,
+  PRODUCTO_EDITADO_EXITO,
+  PRODUCTO_EDITADO_ERROR,
 } from "../types";
 
 export const crearNuevoProductoAction = (producto) => {
@@ -70,15 +74,45 @@ export const eliminarProducto = (id) => {
       dispatch({
         type: PRODUCTO_ELIMINADO_EXITO,
       });
-      Swal.fire(
-        'Eliminado!',
-        'El producto ha sido eliminado',
-        'success'
-      )
+      Swal.fire("Eliminado!", "El producto ha sido eliminado", "success");
     } catch (error) {
       console.log(error);
       dispatch({
         type: PRODUCTO_ELIMINADO_ERROR,
+        payload: true,
+      });
+    }
+  };
+};
+
+export const obtenerEditar = (prod) => {
+  return (dispatch) => {
+    dispatch({
+      type: OBTENER_PRODUCTO_EDITAR,
+      payload: prod,
+    });
+  };
+};
+
+export const editarProducto = (producto) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: COMENZAR_EDICION_PRODUCTO,
+      });
+
+      await axios.put(
+        `http://localhost:4000/productos/${producto.id}`,
+        producto
+      );
+      dispatch({
+        type: PRODUCTO_EDITADO_EXITO,
+        payload: producto,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: PRODUCTO_EDITADO_ERROR,
         payload: true,
       });
     }
