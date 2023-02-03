@@ -23,7 +23,7 @@ export const crearNuevoProductoAction = (producto) => {
       payload: true,
     });
     try {
-      await axios.post("http://localhost:4000/productos", producto);
+      await axios.post("https://json-server-iota-ochre.vercel.app/productos", producto);
       dispatch({
         type: AGREGAR_PRODUCTO_EXITO,
         payload: producto,
@@ -49,7 +49,7 @@ export const obtenerProductosAction = () => {
       payload: true,
     });
     try {
-      const productos = await axios.get("http://localhost:4000/productos");
+      const productos = await axios.get("https://json-server-iota-ochre.vercel.app/productos");
       dispatch({
         type: DESCARGA_PRODUCTOS_EXITO,
         payload: productos.data,
@@ -70,7 +70,7 @@ export const eliminarProducto = (id) => {
       payload: id,
     });
     try {
-      await axios.delete(`http://localhost:4000/productos/${id}`);
+      await axios.delete(`https://json-server-iota-ochre.vercel.app/productos/${id}`);
       dispatch({
         type: PRODUCTO_ELIMINADO_EXITO,
       });
@@ -102,7 +102,7 @@ export const editarProducto = (producto) => {
       });
 
       await axios.put(
-        `http://localhost:4000/productos/${producto.id}`,
+        `https://json-server-iota-ochre.vercel.app/productos/${producto.id}`,
         producto
       );
       dispatch({
